@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
+const jwt = require('../server/node_modules/jsonwebtoken');
 const dotenv = require('../server/node_modules/dotenv');
 const pool = require('../server/src/db/pool');
 const { authenticator } = require('../server/node_modules/otplib');
@@ -73,6 +74,19 @@ async function checkBasicApiGuards() {
 
   const protectedRequest = await request('/dashboards/district/DIST001');
   if (protectedRequest.status !== 401) throw new Error(`Expected unauthenticated dashboard API to return 401; got ${protectedRequest.status}.`);
+  const insightsAnonymous = await request('/operations/insights');
+  if (insightsAnonymous.status !== 401) throw new Error(`Expected unauthenticated operations insights to return 401; got ${insightsAnonymous.status}.`);
+  const parentToken = jwt.sign({ auth_version: 2, email_verified: true, role: 'parent' }, process.env.JWT_SECRET);
+  const insightsParent = await request('/operations/insights', { headers: { authorization: `Bearer ${parentToken}` } });
+  if (insightsParent.status !== 403) throw new Error(`Expected family accounts to be denied dispatcher insights; got ${insightsParent.status}.`);
+  const districtToken = jwt.sign({ auth_version: 2, email_verified: true, role: 'district_admin', district_id: 'DIST001' }, process.env.JWT_SECRET);
+  const operationalInsights = await request('/operations/insights', { headers: { authorization: `Bearer ${districtToken}` } });
+  if (operationalInsights.status !== 200 || operationalInsights.body.evaluation !== 'rules-v1' || !Array.isArray(operationalInsights.body.insights)) {
+    throw new Error(`District operations insights failed: ${JSON.stringify(operationalInsights.body)}`);
+  }
+  if (operationalInsights.body.insights.some((item) => !item.id || !item.severity || !item.recommendation || !item.route_id)) {
+    throw new Error('Operations insights returned an incomplete or unscoped item.');
+  }
 
   const pendingAccount = await pool.query(`SELECT username FROM users WHERE signup_required=TRUE LIMIT 1`);
   if (pendingAccount.rows[0]) {
@@ -82,7 +96,7 @@ async function checkBasicApiGuards() {
 
   const invalidSignup = await post('/auth/signup', { username: 'bad', email: 'bad@example.invalid', role: 'unknown' });
   if (invalidSignup.status !== 400) throw new Error('Invalid signup role was not rejected.');
-  console.log('PASS API: health, protected-dashboard auth guard, legacy-password rejection, and invalid-role signup rejection.');
+  console.log(`PASS API: health, protected-dashboard and operations-insights role guards, ${operationalInsights.body.insights.length} structured district insights, legacy-password rejection, and invalid-role signup rejection.`);
 }
 
 async function checkSignupAndAuthentication() {

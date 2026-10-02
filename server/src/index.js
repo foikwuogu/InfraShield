@@ -11,6 +11,7 @@ const alertRoutes = require('./routes/alerts');
 const schedulingRoutes = require('./routes/scheduling');
 const gpsRoutes = require('./routes/gps');
 const familyRoutes = require('./routes/family');
+const operationsRoutes = require('./routes/operations');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use('/api/alerts', alertRoutes);
 app.use('/api/scheduling', schedulingRoutes);
 app.use('/api/gps', gpsRoutes);
 app.use('/api/family', familyRoutes);
+app.use('/api/operations', operationsRoutes);
 app.use('/api', referenceRoutes);
 
 app.use((req, res) => {

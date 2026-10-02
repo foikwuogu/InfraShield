@@ -16,6 +16,7 @@ This demo includes the transportation and attendance system plus role-specific v
 - Teacher dashboard (grade roster + transportation-linked attendance)
 - District command center (fleet summary, campus rollup, active delays, dispatch)
 - County command center (district and campus rollup)
+- Scoped operations intelligence: explainable checks flag stale trip GPS, unaccounted-for riders on active trips, unavailable active-trip drivers, and prolonged delays, with suggested human-reviewed next steps
 - JWT-based login with role-based dashboards for drivers, school admins, teachers, parents, district admins, and county admins
 
 ## Authors
@@ -175,6 +176,7 @@ All routes except `/api/auth/signup`, `/api/auth/login`, `/api/auth/verify-email
 | GET  | `/api/dashboards/parent/:parentId` | Parent's children + notifications |
 | GET  | `/api/dashboards/district/:districtId` | District summary + active delays |
 | GET  | `/api/dashboards/county/:countyId` | County rollup by district |
+| GET  | `/api/operations/insights` | Scope-limited, explainable dispatcher checks for school/district/county admins |
 | POST | `/api/family/class-attendance/:studentId` | Assigned teacher records today's class attendance |
 | GET/POST | `/api/family/messages/student/:studentId` | Parent/assigned teacher reads or sends a student-scoped message |
 | GET | `/api/family/messages/inbox` | Current parent's or teacher's conversation list |
@@ -182,6 +184,8 @@ All routes except `/api/auth/signup`, `/api/auth/login`, `/api/auth/verify-email
 | POST | `/api/gps/ping` | Assigned driver records trip GPS and stop-arrival progress |
 | GET | `/api/gps/student/:studentId/route` | Parent/assigned teacher reads authorized student route and estimated arrival |
 | GET  | `/api/students`, `/api/buses`, `/api/drivers`, `/api/routes` | Reference lookups |
+
+Operations insights are deterministic decision support, not an autonomous AI system. They refresh every 30 seconds and can be refreshed manually. The current rules flag missing/stale GPS on trips marked in progress (5-minute warning, 10-minute critical), unboarded roster counts on active trips, drivers marked OUT/OFF_SHIFT on active trips, and active delays of at least 10 minutes (30 minutes is critical). The checks do not automatically mark students absent, contact families, or change assignments; dispatch staff review and choose any follow-up. No external AI provider or student-identifying model prompt is used.
 
 ## Deploying to production
 

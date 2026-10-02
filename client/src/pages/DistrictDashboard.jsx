@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '../AuthContext.jsx';
 import { api } from '../api/client.js';
 import AlertBanner from '../components/AlertBanner.jsx';
+import OperationsInsights from '../components/OperationsInsights.jsx';
 
 export default function DistrictDashboard() {
   const { user } = useAuth();
@@ -12,7 +13,6 @@ export default function DistrictDashboard() {
   const [alertMessage, setAlertMessage] = useState('');
   const [alertSeverity, setAlertSeverity] = useState('WARNING');
   const [banner, setBanner] = useState('');
-
   const load = useCallback(async () => {
     try {
       const [dashboardRes, availabilityRes] = await Promise.all([
@@ -88,6 +88,8 @@ export default function DistrictDashboard() {
       </div>
 
       {banner && <div className="alert alert-success">{banner}</div>}
+
+      <OperationsInsights />
 
       <div className="stat-row wide">
         <div className="stat"><span className="stat-value">{summary.schools}</span><span className="stat-label">Schools</span></div>

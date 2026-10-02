@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '../AuthContext.jsx';
 import { api } from '../api/client.js';
 import AlertBanner from '../components/AlertBanner.jsx';
+import OperationsInsights from '../components/OperationsInsights.jsx';
 
 export default function CountyDashboard() {
   const { user } = useAuth();
@@ -46,6 +47,8 @@ export default function CountyDashboard() {
         <div className="stat stat-warn"><span className="stat-value">{summary.delayed_routes}</span><span className="stat-label">Delayed routes</span></div>
         <div className="stat stat-bad"><span className="stat-value">{summary.active_alerts}</span><span className="stat-label">Active alerts</span></div>
       </div>
+
+      <OperationsInsights />
 
       <section className="panel">
         <h3>By district</h3>

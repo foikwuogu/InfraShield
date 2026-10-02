@@ -55,6 +55,7 @@ export const api = {
   sendStudentMessage: (studentId, payload) => request(`/family/messages/student/${studentId}`, { method: 'POST', body: payload }),
   markClassAttendance: (studentId, payload) => request(`/family/class-attendance/${studentId}`, { method: 'POST', body: payload }),
   setSmsPreference: (enabled) => request('/family/sms-preference', { method: 'POST', body: { enabled } }),
+  operationsInsights: () => request('/operations/insights'),
 };
 
 export { getToken };
