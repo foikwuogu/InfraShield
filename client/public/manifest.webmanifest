@@ -1,0 +1,20 @@
+{
+  "id": "/",
+  "name": "InfraShield | Smart School Transportation",
+  "short_name": "InfraShield",
+  "description": "School transportation, attendance, and family status dashboards.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f1f5f9",
+  "theme_color": "#0f1b33",
+  "icons": [
+    {
+      "src": "/icons/infrashield.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

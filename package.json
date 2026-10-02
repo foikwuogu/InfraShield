@@ -1,0 +1,13 @@
+{
+  "name": "infrashield",
+  "version": "1.0.0",
+  "private": true,
+  "description": "InfraShield school transportation and attendance dashboard",
+  "engines": {
+    "node": ">=20.19 <21 || >=22.12"
+  },
+  "scripts": {
+    "dev:all": "node scripts/infra.js dev",
+    "check": "node scripts/infra.js check"
+  }
+}
