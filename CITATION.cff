@@ -3,7 +3,8 @@ message: >-
   If you use InfraShield, please cite this software and its contributors.
 title: "InfraShield: Smart School Transportation and Attendance System"
 version: 1.0.0
-date-released: 2026-10-01
+date-released: 2026-10-02
+license: MIT
 authors:
   - family-names: Ikwuogu
     given-names: Friday Ogochukwu

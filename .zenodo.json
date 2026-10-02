@@ -3,6 +3,7 @@
   "title": "InfraShield: Smart School Transportation and Attendance System",
   "version": "1.0.0",
   "publication_date": "2026-10-02",
+  "license": "mit",
   "description": "Role-based school transportation and attendance dashboards with AM/PM bus trip tracking, school-ID boarding verification, family messaging, classroom attendance, and route progress notifications.",
   "creators": [
     {

@@ -199,8 +199,8 @@ All routes except `/api/auth/signup`, `/api/auth/login`, `/api/auth/verify-email
    environment variable.
 4. Before going live: set unique `JWT_SECRET`, `OTP_PEPPER`,
    `TOTP_ENCRYPTION_KEY`, SMTP credentials and an administrator invite code;
-   replace sample contact emails with verified organization addresses; choose
-   and document the project's license; use HTTPS and configure database backups.
+   replace sample contact emails with verified organization addresses; this
+   project is licensed under MIT; use HTTPS and configure database backups.
 
 ## Security notes for this MVP
 
