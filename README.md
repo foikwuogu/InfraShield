@@ -18,6 +18,12 @@ This demo includes the transportation and attendance system plus role-specific v
 - County command center (district and campus rollup)
 - JWT-based login with role-based dashboards for drivers, school admins, teachers, parents, district admins, and county admins
 
+## Authors
+
+- Friday Ogochukwu Ikwuogu
+- Joe Achi — Computer Science student, University of Benin, Nigeria
+- Halimat Popoola Oluwabukola — Computer Science Department, University of Texas Permian Basin, Texas, USA (`popoola_h51572@utpb.edu`)
+
 The seed creates **13 demo campuses across eight Permian Basin counties and districts**, including Midland, Odessa, Andrews, Big Spring, Stanton, Monahans, Crane, and Pecos. It contains **20 drivers, 20 teachers, and 50 students per campus (650 total)** with teacher/class assignment, morning and afternoon trip runs, activation-required parent/staff identities, and demo attendance. Route assignments and attendance are dated for the day the seed runs. All sample names, contacts, phone numbers, and student records are fictional demo data.
 
 Teachers can record class attendance and message a student's parent; parents can see class status, separate AM/PM boarding and drop-off times, message the assigned teacher, and view afternoon route progress/estimated arrival. Driver GPS pings update stop progress and create an idempotent in-app notification when an afternoon bus is estimated to be within ten minutes of a student's stop. SMS is optional and sent only after parent opt-in. Biometric capture and production FERPA/COPPA compliance are not implemented.
@@ -193,8 +199,8 @@ All routes except `/api/auth/signup`, `/api/auth/login`, `/api/auth/verify-email
    environment variable.
 4. Before going live: set unique `JWT_SECRET`, `OTP_PEPPER`,
    `TOTP_ENCRYPTION_KEY`, SMTP credentials and an administrator invite code;
-   replace sample contact emails with verified organization addresses; use
-   HTTPS and configure production database backups.
+   replace sample contact emails with verified organization addresses; choose
+   and document the project's license; use HTTPS and configure database backups.
 
 ## Security notes for this MVP
 

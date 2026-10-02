@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: >-
+  If you use InfraShield, please cite this software and its contributors.
+title: "InfraShield: Smart School Transportation and Attendance System"
+version: 1.0.0
+date-released: 2026-10-01
+authors:
+  - family-names: Ikwuogu
+    given-names: Friday Ogochukwu
+  - family-names: Achi
+    given-names: Joe
+    affiliation: Computer Science, University of Benin, Nigeria
+  - family-names: Oluwabukola
+    given-names: Halimat Popoola
+    affiliation: Computer Science Department, University of Texas Permian Basin, Texas, USA
+    email: popoola_h51572@utpb.edu
+repository-code: "https://github.com/foikwuogu/InfraShield"
+abstract: >-
+  Role-based school transportation and attendance dashboards with AM/PM bus
+  trip tracking, student school-ID boarding verification, family messaging,
+  class attendance, and route progress notifications.
+keywords:
+  - school transportation
+  - attendance
+  - education technology
+  - student safety
+  - Permian Basin

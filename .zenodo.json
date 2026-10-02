@@ -1,0 +1,27 @@
+{
+  "upload_type": "software",
+  "title": "InfraShield: Smart School Transportation and Attendance System",
+  "version": "1.0.0",
+  "publication_date": "2026-10-02",
+  "description": "Role-based school transportation and attendance dashboards with AM/PM bus trip tracking, school-ID boarding verification, family messaging, classroom attendance, and route progress notifications.",
+  "creators": [
+    {
+      "name": "Ikwuogu, Friday Ogochukwu"
+    },
+    {
+      "name": "Achi, Joe",
+      "affiliation": "Computer Science, University of Benin, Nigeria"
+    },
+    {
+      "name": "Oluwabukola, Halimat Popoola",
+      "affiliation": "Computer Science Department, University of Texas Permian Basin, Texas, USA"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/foikwuogu/InfraShield",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}
