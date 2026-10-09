@@ -43,6 +43,36 @@ The same React app adapts to phone, iPad/tablet, and desktop layouts. Drivers ca
 
 The service worker caches only the static app shell and assets; authenticated API/student data is never cached for offline use. In production, serve the frontend over HTTPS and proxy the same-origin `/api` path to the Express server, or set `VITE_API_URL` to the API's HTTPS URL at build time. Never point a phone build at `localhost`, which refers to the phone itself.
 
+## GitHub Pages deployment
+
+The browser app is intended for https://foikwuogu.github.io/InfraShield/.
+GitHub Pages hosts only the frontend; it cannot run Express or PostgreSQL.
+The Pages workflow publishes `client/dist` rather than rendering this README.
+
+1. Deploy `server/` to an HTTPS Node host with a managed PostgreSQL database,
+   using the production setup below. Set `CLIENT_ORIGIN` to
+   `https://foikwuogu.github.io` (the origin has no `/InfraShield/` path).
+   Configure the database, unique authentication secrets, and SMTP privately
+   in the host's environment. Migrate the database; seed only a demo database.
+2. In GitHub **Settings > Secrets and variables > Actions > Variables**, create
+   `VITE_API_URL` with the hosted API URL, for example
+   `https://your-api.example.com/api`, without a trailing slash. This is a
+   public frontend setting, not a place for passwords or API secrets.
+3. In **Settings > Pages > Build and deployment > Source**, select
+   **GitHub Actions** instead of publishing a branch's README.
+4. Push the deployment changes to `main`, or run **Deploy InfraShield to
+   GitHub Pages** from the Actions tab. The workflow deliberately stops if
+   the hosted API URL is missing or invalid.
+5. Open https://foikwuogu.github.io/InfraShield/#/login. Activate a linked
+   demo identity and sign in to see its authorized dashboard. Confirm email
+   delivery and cross-origin API requests before sharing the app.
+
+Hash routes allow dashboard links to reload on Pages without a server-side
+rewrite. The build, install manifest, and service worker support the
+`/InfraShield/` subdirectory as well as root-hosted deployments.
+Publishing the frontend alone does not make sign-in or live results work.
+Use fictional demo data only until the security and privacy work below is complete.
+
 ## Architecture
 
 ```
