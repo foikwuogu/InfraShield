@@ -5,6 +5,9 @@ function getToken() {
 }
 
 async function request(path, options = {}) {
+  if (import.meta.env.PROD && window.location.hostname.endsWith('.github.io') && !import.meta.env.VITE_API_URL) {
+    throw new Error('The hosted API is not configured. Sign-in and live data are unavailable.');
+  }
   const token = getToken();
   const res = await fetch(`${API_URL}${path}`, {
     ...options,

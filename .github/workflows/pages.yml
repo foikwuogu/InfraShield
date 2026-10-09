@@ -33,6 +33,10 @@ jobs:
       - name: Validate hosted API configuration
         run: |
           node --input-type=module <<'NODE'
+          if (!process.env.VITE_API_URL) {
+            console.log('::warning::Publishing the frontend only. Configure VITE_API_URL to enable sign-in and live dashboards.');
+            process.exit(0);
+          }
           const url = new URL(process.env.VITE_API_URL);
           if (url.protocol !== 'https:' || ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname) || url.username || url.password || url.search || url.hash || !url.pathname.endsWith('/api')) {
             throw new Error('Set the repository variable VITE_API_URL to your public HTTPS API URL ending in /api, without credentials or a trailing slash.');

@@ -54,15 +54,16 @@ The Pages workflow publishes `client/dist` rather than rendering this README.
    `https://foikwuogu.github.io` (the origin has no `/InfraShield/` path).
    Configure the database, unique authentication secrets, and SMTP privately
    in the host's environment. Migrate the database; seed only a demo database.
-2. In GitHub **Settings > Secrets and variables > Actions > Variables**, create
+2. To enable sign-in and live dashboards, in GitHub **Settings > Secrets and variables > Actions > Variables**, create
    `VITE_API_URL` with the hosted API URL, for example
    `https://your-api.example.com/api`, without a trailing slash. This is a
    public frontend setting, not a place for passwords or API secrets.
 3. In **Settings > Pages > Build and deployment > Source**, select
    **GitHub Actions** instead of publishing a branch's README.
 4. Push the deployment changes to `main`, or run **Deploy InfraShield to
-   GitHub Pages** from the Actions tab. The workflow deliberately stops if
-   the hosted API URL is missing or invalid.
+   GitHub Pages** from the Actions tab. Without a hosted API URL, the workflow
+   publishes the frontend only; account actions report that the API is not
+   configured. An invalid configured API URL still stops the build.
 5. Open https://foikwuogu.github.io/InfraShield/#/login. Activate a linked
    demo identity and sign in to see its authorized dashboard. Confirm email
    delivery and cross-origin API requests before sharing the app.
